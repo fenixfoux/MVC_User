@@ -1,0 +1,55 @@
+﻿<html>
+<head>
+    <title>Use Oracle Stored Procedure in MVC</title>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <h3>Add User Page without styles</h3>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" id="txtName" placeholder="Type Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>Roll</td>
+            <td>
+                <input type="text" id="txtRoll" placeholder="Type Roll" />
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" id="btnSave" value="button" />
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSave").click(function () {
+            var oUser = {
+                u_name: $("#txtName").val(),
+                u_roll: $("#txtRoll").val()
+            };
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/User/Save_User",
+                traditional: true,
+                data: JSON.stringify(oUser),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    oUser = jQuery.parseJSON(data);
+                    alert("Saved");
+                }
+            });
+        });
+    });
+
+    
+</script>
